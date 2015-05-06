@@ -11,6 +11,7 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run(spawnPipe)
 import qualified XMonad.StackSet as W
 import XMonad.Layout.IndependentScreens
+import XMonad.Util.WorkspaceCompare
 
 import System.Taffybar.XMonadLog (dbusLogWithPP, taffybarDefaultPP,
                                    taffybarColor, taffybarEscape)
@@ -18,22 +19,6 @@ import System.Taffybar.XMonadLog (dbusLogWithPP, taffybarDefaultPP,
 import DBus
 import DBus.Client
 
-
-conf monitors dbus = defaultConfig
-            { modMask = mod4Mask
-            , terminal = "xfce4-terminal"
-            , borderWidth = 3
-            , normalBorderColor = "#778877"
-            , focusedBorderColor = "#AA3333"
-            , handleEventHook = fullscreenEventHook
-            , workspaces = withScreens monitors wsNames
-            , layoutHook = myLayoutHook
-            , manageHook = manageDocks <+> myManageHook
-                           <+> manageHook defaultConfig
-            , logHook = dbusLogWithPP dbus myXmobarPP
-            }
-            `additionalKeysP` myKeys
-            `additionalKeys` wsKeys
 
 -- Tags/Workspaces
 wsNames = map show [1 .. 9 :: Int]
@@ -67,6 +52,7 @@ myXmobarPP = taffybarDefaultPP
    , ppWsSep = " : "
    , ppLayout  = taffybarColor "DarkOrange" "" . wrap " [" "] "
    , ppTitle   = taffybarColor "#ffffff" "" . shorten 150
+   , ppSort = getSortByTag
    }
 
 -- Key bindings
@@ -78,11 +64,27 @@ myKeys = [ ("M-b", sendMessage ToggleStruts)
 wsKeys = [
            ((m .|. mod4Mask, k), windows $ onCurrentScreen f i)
               | (i, k) <- zip wsNames [xK_1 .. xK_9]
-              , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+              , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
+
+conf monitors dbus = defaultConfig
+            { modMask = mod4Mask
+            , terminal = "xfce4-terminal"
+            , borderWidth = 3
+            , normalBorderColor = "#778877"
+            , focusedBorderColor = "#AA3333"
+            , handleEventHook = fullscreenEventHook
+            , workspaces = withScreens monitors wsNames
+            , layoutHook = myLayoutHook
+            , manageHook = manageDocks <+> myManageHook
+                           <+> manageHook defaultConfig
+            , logHook = dbusLogWithPP dbus myXmobarPP
+            }
+            `additionalKeysP` myKeys
+            `additionalKeys` wsKeys
 
 main = do
   dbus <- connectSession
-  tools <- spawnPipe "~/.xmonad/xsession"
   monitors <- countScreens
+  spawn "~/.xmonad/xsession"
   xmonad $ withUrgencyHook NoUrgencyHook $ conf monitors dbus
