@@ -11,4 +11,6 @@ if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
 fi
 
+mkdir -p ~/.config/taffybar/
+ln -sf ~/.xmonad/taffybar.hs ~/.config/taffybar/taffybar.hs
 exec taffybar
