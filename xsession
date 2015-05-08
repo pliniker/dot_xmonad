@@ -11,6 +11,9 @@ if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
 fi
 
+mkdir -p ~/.config/xfce4/terminal/
+ln -sf ~/.xmonad/xfce4-terminalrc ~/.config/xfce4/terminal/terminalrc
+
 mkdir -p ~/.config/taffybar/
 ln -sf ~/.xmonad/taffybar.hs ~/.config/taffybar/taffybar.hs
 exec taffybar

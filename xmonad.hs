@@ -1,4 +1,5 @@
 import System.IO
+import System.Exit(ExitCode(ExitSuccess), exitWith)
 
 import XMonad
 import XMonad.Hooks.DynamicLog

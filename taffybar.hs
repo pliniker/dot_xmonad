@@ -41,5 +41,5 @@ main = do
   defaultTaffybar defaultTaffybarConfig { startWidgets = [ xmlog, note ]
                                         , endWidgets = [ tray, wea, clock,
                                                          mem, cpu, mpris ]
-                                        , monitorNumber = 1
+                                        , monitorNumber = 0
                                         }
