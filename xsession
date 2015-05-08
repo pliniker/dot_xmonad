@@ -11,6 +11,10 @@ if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
 fi
 
+if [ -x /usr/bin/fdpowermon ] ; then
+    fdpowermon &
+fi
+
 mkdir -p ~/.config/xfce4/terminal/
 ln -sf ~/.xmonad/xfce4-terminalrc ~/.config/xfce4/terminal/terminalrc
 
