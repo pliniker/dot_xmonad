@@ -34,12 +34,11 @@ main = do
       note = notifyAreaNew defaultNotificationConfig
       xmlog = xmonadLogNew
       wea = weatherNew (defaultWeatherConfig "KAVL") 10
-      mpris = mprisNew
       mem = pollingGraphNew memCfg 1 memCallback
       cpu = pollingGraphNew cpuCfg 1 cpuCallback
       tray = systrayNew
   defaultTaffybar defaultTaffybarConfig { startWidgets = [ xmlog, note ]
                                         , endWidgets = [ tray, wea, clock,
-                                                         mem, cpu, mpris ]
+                                                         mem, cpu ]
                                         , monitorNumber = 0
                                         }
