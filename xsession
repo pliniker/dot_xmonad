@@ -1,11 +1,19 @@
-#!/bin/bash
+#!/bin/bash -x
 
-# if it looks like we're running in a virtualbox vm, try setting 3 monitors
-if [[ `lspci | grep VirtualBox` != "" ]]; then
-    xrandr --output VBOX0 --mode 1920x1080 --primary --auto --output VBOX1 --mode 1920x1080 --right-of VBOX0 --auto --output VBOX2 --mode 1920x1080 --auto --right-of VBOX1
+# run a custom monitor script
+if [ -x ~/.xrandr.sh ] ; then
+    ~/.xrandr.sh
+fi
+# run a custom desktop wallpaper script
+if [ -x ~/.wallpaper.sh ] ; then
+    ~/.wallpaper.sh
 fi
 
-xscreensaver -no-splash &
+ln -sf ~/.xmonad/gtkrc ~/.gtkrc-2.0
+
+if [ -x /usr/bin/xscreensaver ] ; then
+    xscreensaver -no-splash &
+fi
 
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
@@ -13,6 +21,14 @@ fi
 
 if [ -x /usr/bin/fdpowermon ] ; then
     fdpowermon &
+fi
+
+if [ -x /usr/bin/xfce4-volumed ] ; then
+    xfce4-volumed
+fi
+
+if [ -x ~/.dropbox-dist/dropboxd ] ; then
+    ~/.drobox.dist/dropboxd &
 fi
 
 mkdir -p ~/.config/xfce4/terminal/
