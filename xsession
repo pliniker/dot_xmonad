@@ -28,7 +28,7 @@ if [ -x /usr/bin/xfce4-volumed ] ; then
 fi
 
 if [ -x ~/.dropbox-dist/dropboxd ] ; then
-    ~/.drobox.dist/dropboxd &
+    ~/.drobox-dist/dropboxd &
 fi
 
 mkdir -p ~/.config/xfce4/terminal/
