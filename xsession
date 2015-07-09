@@ -31,6 +31,9 @@ if [ -x ~/.dropbox-dist/dropboxd ] ; then
     ~/.dropbox-dist/dropboxd &
 fi
 
+# make capslock a control key
+setxkbmap -option ctrl:nocaps
+
 mkdir -p ~/.config/xfce4/terminal/
 ln -sf ~/.xmonad/xfce4-terminalrc ~/.config/xfce4/terminal/terminalrc
 
