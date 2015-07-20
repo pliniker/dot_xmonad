@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+ln -sf ~/.xmonad/gtkrc ~/.gtkrc-2.0
+
 # run a custom monitor script
 if [ -x ~/.xrandr.sh ] ; then
     ~/.xrandr.sh
@@ -8,8 +10,6 @@ fi
 if [ -x ~/.wallpaper.sh ] ; then
     ~/.wallpaper.sh
 fi
-
-ln -sf ~/.xmonad/gtkrc ~/.gtkrc-2.0
 
 if [ -x /usr/bin/xscreensaver ] ; then
     xscreensaver -no-splash &
@@ -25,6 +25,10 @@ fi
 
 if [ -x /usr/bin/xfce4-volumed ] ; then
     xfce4-volumed
+fi
+
+if [ -x /usr/bin/keychain ] ; then
+    keychain
 fi
 
 if [ -x ~/.dropbox-dist/dropboxd ] ; then
