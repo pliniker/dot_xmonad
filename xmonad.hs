@@ -14,8 +14,7 @@ import qualified XMonad.StackSet as W
 import XMonad.Layout.IndependentScreens
 import XMonad.Util.WorkspaceCompare
 
-import System.Taffybar.XMonadLog (dbusLogWithPP, taffybarDefaultPP,
-                                  taffybarColor, taffybarEscape)
+import System.Taffybar.Hooks.PagerHints (pagerHints)
 
 import DBus
 import DBus.Client
@@ -39,20 +38,6 @@ myManageHook = composeAll
   , className =? "XCalc" --> doFloat
   , className =? "XMessage" --> doFloat
   ]
-
--- Statusbar
-blank _ = ""
-myXmobarPP = taffybarDefaultPP
-  { ppCurrent = taffybarColor "#f8f8f8" "DodgerBlue4" . wrap " " " "
-  , ppVisible = taffybarColor "#f8f8f8" "LightSkyBlue4" . wrap " " " "
-  , ppUrgent  = taffybarColor "#f8f8f8" "red4" . wrap " " " "
-  , ppHidden = blank
-  , ppHiddenNoWindows = blank
-  , ppWsSep = " : "
-  , ppLayout  = taffybarColor "DarkOrange" "" . wrap " [" "] "
-  , ppTitle   = taffybarColor "#ffffff" "" . shorten 150
-  , ppSort = getSortByTag
-  }
 
 -- Key bindings
 myKeys = [ ("M-b", sendMessage ToggleStruts)
@@ -84,7 +69,6 @@ conf monitors dbus = defaultConfig
   , layoutHook = myLayoutHook
   , manageHook = manageDocks <+> myManageHook
                  <+> manageHook defaultConfig
-  , logHook = dbusLogWithPP dbus myXmobarPP
   }
   `additionalKeysP` myKeys
   `additionalKeys` wsKeys
@@ -94,4 +78,4 @@ main = do
   dbus <- connectSession
   monitors <- countScreens
   spawn "~/.xmonad/xsession"
-  xmonad $ withUrgencyHook NoUrgencyHook $ conf monitors dbus
+  xmonad $ withUrgencyHook NoUrgencyHook $ ewmh $ pagerHints $ conf monitors dbus
