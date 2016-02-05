@@ -38,9 +38,16 @@ fi
 # make capslock a control key
 setxkbmap -option ctrl:nocaps
 
+# install fonts
+mkdir -p ~/.fonts
+cp -r ~/.xmonad/fonts/*.ttf ~/.fonts/
+fc-cache -fv
+
+# install xfce4-terminal config
 mkdir -p ~/.config/xfce4/terminal/
 ln -sf ~/.xmonad/xfce4-terminalrc ~/.config/xfce4/terminal/terminalrc
 
+# install taffybar config and launch
 mkdir -p ~/.config/taffybar/
 ln -sf ~/.xmonad/taffybar.hs ~/.config/taffybar/taffybar.hs
 exec taffybar
