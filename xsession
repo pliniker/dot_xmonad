@@ -11,8 +11,8 @@ if [ -x ~/.wallpaper.sh ] ; then
     ~/.wallpaper.sh
 fi
 
-if [ -x /usr/bin/xscreensaver ] ; then
-    xscreensaver -no-splash &
+if [ -x /usr/bin/gnome-screensaver ] ; then
+    gnome-screensaver -no-splash &
 fi
 
 if [ -x /usr/bin/nm-applet ] ; then

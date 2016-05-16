@@ -41,7 +41,7 @@ myManageHook = composeAll
 
 -- Key bindings
 myKeys = [ ("M-b", sendMessage ToggleStruts)
-         , ("C-M1-l", spawn "xscreensaver-command --lock")
+         , ("C-M1-l", spawn "gnome-screensaver-command -l")
          , ("C-M-M1-q", spawn "xmonad --recompile && xmonad --restart")
          , ("C-M-S-q", io (exitWith ExitSuccess))
          ]
