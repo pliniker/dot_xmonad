@@ -12,7 +12,7 @@ if [ -x ~/.wallpaper.sh ] ; then
 fi
 
 if [ -x /usr/bin/gnome-screensaver ] ; then
-    gnome-screensaver -no-splash &
+    gnome-screensaver &
 fi
 
 if [ -x /usr/bin/nm-applet ] ; then
@@ -39,9 +39,11 @@ fi
 setxkbmap -option ctrl:nocaps
 
 # install fonts
-mkdir -p ~/.fonts
-cp -r ~/.xmonad/fonts/*.ttf ~/.fonts/
-fc-cache -fv
+if [ ! -d ~/.fonts ] ; then
+    mkdir -p ~/.fonts
+    cp -r ~/.xmonad/fonts/*.ttf ~/.fonts/
+    fc-cache -fv
+fi
 
 # install xfce4-terminal config
 mkdir -p ~/.config/xfce4/terminal/
