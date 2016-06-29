@@ -1,11 +1,13 @@
 #!/bin/bash -x
 
-ln -sf ~/.xmonad/gtkrc ~/.gtkrc-2.0
+# setup theme for gnome-terminal
+~/.xmonad/gnome-terminal.sh
 
 # run a custom monitor script
 if [ -x ~/.xrandr.sh ] ; then
     ~/.xrandr.sh
 fi
+
 # run a custom desktop wallpaper script
 if [ -x ~/.wallpaper.sh ] ; then
     ~/.wallpaper.sh
@@ -16,7 +18,7 @@ if [ -x /usr/bin/gnome-screensaver ] ; then
 fi
 
 if [ -x /usr/bin/nm-applet ] ; then
-   nm-applet --sm-disable &
+    nm-applet --sm-disable &
 fi
 
 if [ -x /usr/bin/fdpowermon ] ; then
@@ -44,10 +46,6 @@ if [ ! -d ~/.fonts ] ; then
     cp -r ~/.xmonad/fonts/*.ttf ~/.fonts/
     fc-cache -fv
 fi
-
-# install xfce4-terminal config
-mkdir -p ~/.config/xfce4/terminal/
-ln -sf ~/.xmonad/xfce4-terminalrc ~/.config/xfce4/terminal/terminalrc
 
 # install taffybar config and launch
 mkdir -p ~/.config/taffybar/

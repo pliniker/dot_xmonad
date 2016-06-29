@@ -60,7 +60,7 @@ remKeys = [ "M-q"
 -- Configuration
 conf monitors dbus = defaultConfig
   { modMask = mod4Mask
-  , terminal = "xfce4-terminal"
+  , terminal = "gnome-terminal"
   , borderWidth = 3
   , normalBorderColor = "#778877"
   , focusedBorderColor = "#AA3333"
