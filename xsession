@@ -1,8 +1,5 @@
 #!/bin/bash -x
 
-# setup theme for gnome-terminal
-~/.xmonad/gnome-terminal.sh
-
 # run a custom monitor script
 if [ -x ~/.xrandr.sh ] ; then
     ~/.xrandr.sh
