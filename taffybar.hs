@@ -39,22 +39,19 @@ pagerConfig   = PagerConfig
 
 main = do
   let memCfg = defaultGraphConfig { graphDataColors = [(1, 0, 0, 1)]
-                                  , graphLabel = Just "mem"
+                                  , graphLabel = Nothing
                                   }
       cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1)
                                                       , (1, 0, 1, 0.5)
                                                       ]
-                                  , graphLabel = Just "cpu"
+                                  , graphLabel = Nothing
                                   }
-  let clock = textClockNew Nothing "<span fgcolor='orange'>%a %b %_d %H:%M</span>" 1
-      note = notifyAreaNew defaultNotificationConfig
+  let clock = textClockNew Nothing "<span fgcolor='#AA3333'>%a %b %_d %H:%M</span>" 1
       xmlog = taffyPagerNew pagerConfig
-      wea = weatherNew (defaultWeatherConfig "KAVL") 10
       mem = pollingGraphNew memCfg 1 memCallback
       cpu = pollingGraphNew cpuCfg 1 cpuCallback
       tray = systrayNew
-  defaultTaffybar defaultTaffybarConfig { startWidgets = [ xmlog, note ]
-                                        , endWidgets = [ tray, wea, clock,
-                                                         mem, cpu ]
+  defaultTaffybar defaultTaffybarConfig { startWidgets = [ xmlog ]
+                                        , endWidgets = [ tray, mem, cpu, clock ]
                                         , monitorNumber = 0
                                         }

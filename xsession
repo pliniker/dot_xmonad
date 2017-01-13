@@ -10,6 +10,10 @@ if [ -x ~/.wallpaper.sh ] ; then
     ~/.wallpaper.sh
 fi
 
+if [ -x /usr/lib/x86_64-linux-gnu/notify-osd ] ; then
+    /usr/lib/x86_64-linux-gnu/notify-osd &
+fi
+
 if [ -x /usr/bin/gnome-screensaver ] ; then
     gnome-screensaver &
 fi
