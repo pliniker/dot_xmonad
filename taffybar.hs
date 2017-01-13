@@ -46,7 +46,7 @@ main = do
                                                       ]
                                   , graphLabel = Nothing
                                   }
-  let clock = textClockNew Nothing "<span fgcolor='#AA3333'>%a %b %_d %H:%M</span>" 1
+  let clock = textClockNew Nothing "<span fgcolor='#f8f8f8'>%a %b %_d %H:%M</span>" 1
       xmlog = taffyPagerNew pagerConfig
       mem = pollingGraphNew memCfg 1 memCallback
       cpu = pollingGraphNew cpuCfg 1 cpuCallback
