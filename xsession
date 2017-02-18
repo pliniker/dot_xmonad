@@ -5,6 +5,10 @@ if [ -x ~/.xrandr.sh ] ; then
     ~/.xrandr.sh
 fi
 
+if [ -x /usr/bin/xcompmgr ] ; then
+    xcompmgr -c &
+fi
+
 # run a custom desktop wallpaper script
 if [ -x ~/.wallpaper.sh ] ; then
     ~/.wallpaper.sh
