@@ -6,7 +6,7 @@ if [ -x ~/.xrandr.sh ] ; then
 fi
 
 if [ -x /usr/bin/compton ] ; then
-    compton -e 1.0 -i 0.9 -f -D3 -b
+    compton -e 1.0 -i 0.95 -f -D3 -b
     #xcompmgr -cfF -t-9 -l-11 -r9 -o.95 -D3 &
 fi
 
