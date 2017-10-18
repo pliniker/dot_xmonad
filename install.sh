@@ -21,3 +21,6 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 # dconf dump /org/gnome/terminal/legacy/profiles:/ > gnome-term.conf
 #
 cat gnome-term.conf | dconf load /org/gnome/terminal/legacy/profiles:/
+
+mkdir -p ~/.config/gtk-3.0/
+cp gtk3-settings.ini ~/.config/gtk-3.0/settings.ini
