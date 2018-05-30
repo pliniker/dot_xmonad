@@ -6,8 +6,9 @@ if [ -x ~/.xrandr.sh ] ; then
 fi
 
 if [ -x /usr/bin/compton ] ; then
-    compton -e 1.0 -i 0.95 -f -D3 -b
-    #xcompmgr -cfF -t-9 -l-11 -r9 -o.95 -D3 &
+    # Don't run this by default, it degrades X responsiveness
+    #compton -e 1.0 -i 0.95 -f -D3 -b
+    echo nocompton
 fi
 
 # run a custom desktop wallpaper script
@@ -41,6 +42,10 @@ fi
 
 if [ -x ~/.dropbox-dist/dropboxd ] ; then
     ~/.dropbox-dist/dropboxd &
+fi
+
+if [ -x ~/.local/bin/powerline-daemon ] ; then
+    powerline-daemon
 fi
 
 # make capslock a control key
