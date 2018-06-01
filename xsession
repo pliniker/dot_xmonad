@@ -48,6 +48,10 @@ if [ -x ~/.local/bin/powerline-daemon ] ; then
     powerline-daemon
 fi
 
+if [ -x /usr/bin/redshift-gtk ] ; then
+    redshift-gtk &
+fi
+
 # make capslock a control key
 setxkbmap -option ctrl:nocaps
 
