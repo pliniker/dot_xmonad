@@ -59,7 +59,7 @@ setxkbmap -option ctrl:nocaps
 if [ ! -d ~/.fonts ] ; then
     mkdir -p ~/.fonts
     cp -r ~/.xmonad/fonts/*.ttf ~/.fonts/
-    fc-cache -fv
+    fc-cache -fv ~/.fonts/
 fi
 
 # install taffybar config and launch

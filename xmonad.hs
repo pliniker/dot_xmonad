@@ -8,6 +8,8 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Grid (Grid(..))
+import XMonad.Layout.Tabbed (simpleTabbed)
 import XMonad.Util.EZConfig
 import XMonad.Util.Run(spawnPipe)
 import qualified XMonad.StackSet as W
@@ -24,12 +26,14 @@ import DBus.Client
 wsNames = map show [1 .. 9 :: Int]
 
 -- Layouts
-myLayoutHook = avoidStruts $ smartBorders ( tiled ||| mtiled ||| full )
+myLayoutHook = avoidStruts $ smartBorders ( tabbed ||| grid ||| full ||| tiled ||| mtiled )
   where
+    tabbed = named "B" $ simpleTabbed
+    grid = named "G" $ Grid
     full = named "X" $ Full
-    mtiled = named "M" $ Mirror tiled
-    tiled = named "T" $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
     -- sets default tile as: Tall nmaster (delta) (golden ratio)
+    tiled = named "T" $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
+    mtiled = named "M" $ Mirror tiled
 
 -- Window management
 myManageHook = composeAll
