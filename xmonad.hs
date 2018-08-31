@@ -23,7 +23,7 @@ import DBus.Client
 
 
 -- Tags/Workspaces
-wsNames = map show [1 .. 9 :: Int]
+wsNames = map show ([1 .. 9 :: Int] ++ [0 :: Int])
 
 -- Layouts
 myLayoutHook = avoidStruts $ smartBorders ( tabbed ||| grid ||| full ||| tiled ||| mtiled )
@@ -52,7 +52,7 @@ myKeys = [ ("M-b", sendMessage ToggleStruts)
 
 -- Workspace keys
 wsKeys = [((m .|. mod4Mask, k), windows $ onCurrentScreen f i)
-              | (i, k) <- zip wsNames [xK_1 .. xK_9]
+              | (i, k) <- zip wsNames ([xK_1 .. xK_9] ++ [xK_0])
               , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
 
