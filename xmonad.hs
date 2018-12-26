@@ -2,6 +2,7 @@ import System.IO
 import System.Exit(ExitCode(ExitSuccess), exitWith)
 
 import XMonad
+import XMonad.Config.Gnome
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -82,4 +83,4 @@ main = do
   dbus <- connectSession
   monitors <- countScreens
   spawn "~/.xmonad/xsession"
-  xmonad $ withUrgencyHook NoUrgencyHook $ ewmh $ pagerHints $ conf monitors dbus
+  xmonad $ withUrgencyHook NoUrgencyHook $ docks $ ewmh $ pagerHints $ conf monitors dbus 

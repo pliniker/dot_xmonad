@@ -1,9 +1,14 @@
 #!/bin/bash -ex
 
 sudo apt install -y git openssh-server fish xmonad taffybar dmenu \
-    notify-osd gnome-terminal redshift redshift-gtk gnome-tweak-tool \
-    gnote nitrogen feh fdpowermon xfce4-volumed \
-    htop emacs vim-nox python-gpgme build-essential curl ibam
+    notify-osd gnome-terminal gnome-tweak-tool \
+    gnote nitrogen htop emacs vim-nox build-essential curl ibam
+
+#
+# setup gnome session manager
+#
+sudo apt install -y gnome-session-flashback
+sudo cp gnome-flashback-xmonad /usr/share/gnome-session/sessions/
 
 #
 # Turn off dnsmasq:
