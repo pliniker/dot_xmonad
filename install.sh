@@ -1,14 +1,15 @@
 #!/bin/bash -ex
 
 sudo apt install -y git openssh-server fish xmonad taffybar dmenu \
-    notify-osd gnome-terminal gnome-tweak-tool \
-    gnote nitrogen htop emacs vim-nox build-essential curl ibam
+    gnome-terminal gnome-tweak-tool gnote nitrogen htop emacs vim-nox \
+    build-essential curl ibam powertop tlp
 
 #
 # setup gnome session manager
 #
 sudo apt install -y gnome-session-flashback
 sudo cp gnome-flashback-xmonad /usr/share/gnome-session/sessions/
+sudo rm /etc/xdg/autostart/nautilus*
 
 #
 # Turn off dnsmasq:
