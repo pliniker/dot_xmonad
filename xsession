@@ -1,9 +1,8 @@
 #!/bin/bash -x
 
 # run gnome daemons in the background
-if [ -x /usr/bin/gnome-flashback-xmonad ] ; then
-    #gnome-session --session=gnome-flashback-xmonad &
-    echo pong
+if [ -x /usr/bin/gnome-flashback ] ; then
+    gnome-flashback &
 fi
 
 # run a custom monitor script
@@ -11,16 +10,9 @@ if [ -x ~/.xrandr.sh ] ; then
     ~/.xrandr.sh
 fi
 
-if [ -x /usr/bin/gnome-screensaver ] ; then
-    gnome-screensaver &
-fi
-
-if [ -x /usr/bin/nm-applet ] ; then
-    nm-applet --sm-disable &
-fi
-
-if [ -x /usr/bin/cbatticon ] ; then
-    cbatticon &
+# run a custom desktop wallpaper script
+if [ -x ~/.wallpaper.sh ] ; then
+    ~/.wallpaper.sh
 fi
 
 if [ -x /usr/bin/keychain ] ; then
@@ -43,14 +35,6 @@ if [ ! -d ~/.fonts ] ; then
     mkdir -p ~/.fonts
     cp -r ~/.xmonad/fonts/*.ttf ~/.fonts/
     fc-cache -fv ~/.fonts/
-fi
-
-pkill -f nautilus
-pkill -f evolution
-
-# run a custom desktop wallpaper script
-if [ -x ~/.wallpaper.sh ] ; then
-    ~/.wallpaper.sh
 fi
 
 # install taffybar config and launch

@@ -2,7 +2,7 @@
 
 sudo apt install -y git openssh-server fish xmonad taffybar dmenu \
     gnome-terminal gnome-tweak-tool gnote nitrogen htop emacs vim-nox \
-    build-essential curl ibam powertop tlp
+    build-essential curl ibam powertop tlp cbatticon
 
 #
 # setup gnome session manager

@@ -3,10 +3,10 @@ import System.Taffybar
 import System.Taffybar.Systray
 import System.Taffybar.SimpleClock
 import System.Taffybar.FreedesktopNotifications
-import System.Taffybar.Weather
-import System.Taffybar.MPRIS
 import System.Taffybar.TaffyPager
 import System.Taffybar.Pager
+import System.Taffybar.Battery
+import System.Taffybar.NetMonitor
 
 import System.Taffybar.Widgets.PollingBar
 import System.Taffybar.Widgets.PollingGraph
@@ -47,11 +47,13 @@ main = do
                                   , graphLabel = Nothing
                                   }
   let clock = textClockNew Nothing "<span fgcolor='#f8f8f8'>%a %b %_d %H:%M</span>" 1
-      xmlog = taffyPagerNew pagerConfig
-      mem = pollingGraphNew memCfg 1 memCallback
-      cpu = pollingGraphNew cpuCfg 1 cpuCallback
+      pager = taffyPagerNew pagerConfig
+      note = notifyAreaNew defaultNotificationConfig
+      mem = pollingGraphNew memCfg 2 memCallback
+      cpu = pollingGraphNew cpuCfg 2 cpuCallback
+      batt = batteryBarNew defaultBatteryConfig 30
       tray = systrayNew
-  defaultTaffybar defaultTaffybarConfig { startWidgets = [ xmlog ]
-                                        , endWidgets = [ tray, mem, cpu, clock ]
+  defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager, note ]
+                                        , endWidgets = [ clock, batt, tray, mem, cpu ]
                                         , monitorNumber = 0
                                         }
