@@ -34,7 +34,7 @@ pagerConfig   = PagerConfig
                 , emptyWorkspace   = colorize "#777777" "black" . small . escape
                 , visibleWorkspace = wrap "(" ")" . escape
                 , urgentWorkspace  = colorize "#f8f8f8" "red4" . escape
-                , widgetSep        = " :: "
+                , widgetSep        = " / "
                 }
 
 main = do
@@ -48,7 +48,6 @@ main = do
                                   }
   let clock = textClockNew Nothing "<span fgcolor='#f8f8f8'>%a %b %_d %H:%M</span>" 1
       pager = taffyPagerNew pagerConfig
-      note = notifyAreaNew defaultNotificationConfig
       mem = pollingGraphNew memCfg 2 memCallback
       cpu = pollingGraphNew cpuCfg 2 cpuCallback
       batt = batteryBarNew defaultBatteryConfig 30
