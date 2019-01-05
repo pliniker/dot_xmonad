@@ -1,0 +1,2 @@
+#!/bin/bash
+gnome-terminal --geometry=64x100 --class=monitor -- sysmon.sh

@@ -39,11 +39,23 @@ cp gtk3-settings.ini ~/.config/gtk-3.0/settings.ini
 #
 pip3 install --user powerline-status
 
-REPO_ROOT=~/.local/lib/python3.5/site-packages/ 
-echo set fish_function_path \$fish_function_path "$REPO_ROOT/powerline/bindings/fish" >> ~/.config/fish/config.fish
-echo powerline-setup >> ~/.config/fish/config.fish
+#REPO_ROOT=~/.local/lib/python3.6/site-packages/ 
+#echo set fish_function_path \$fish_function_path "$REPO_ROOT/powerline/bindings/fish" >> ~/.config/fish/config.fish
+#echo powerline-setup >> ~/.config/fish/config.fish
 
 #
 # Configure redshift
 #
 cp redshift.conf ~/.config/redshift.conf
+
+#
+# Nice scripts
+#
+mkdir ~/bin/
+cp tools/* ~/bin/
+
+#
+# fish shell
+#
+mkdir -i ~/.config/fish/
+cp fish/config.fish ~/.config/fish/

@@ -52,7 +52,7 @@ main = do
       cpu = pollingGraphNew cpuCfg 2 cpuCallback
       batt = batteryBarNew defaultBatteryConfig 30
       tray = systrayNew
-  defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager, note ]
+  defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager ]
                                         , endWidgets = [ clock, batt, tray, mem, cpu ]
                                         , monitorNumber = 0
                                         }

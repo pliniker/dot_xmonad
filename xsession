@@ -27,15 +27,16 @@ if [ -x ~/.local/bin/powerline-daemon ] ; then
     powerline-daemon
 fi
 
-# make capslock a control key
-setxkbmap -option ctrl:nocaps
-
 # install fonts
 if [ ! -d ~/.fonts ] ; then
     mkdir -p ~/.fonts
     cp -r ~/.xmonad/fonts/*.ttf ~/.fonts/
     fc-cache -fv ~/.fonts/
 fi
+
+# make capslock a control key
+setxkbmap -option ctrl:nocaps
+xmodmap -e "keysym Print = Menu"
 
 # install taffybar config and launch
 mkdir -p ~/.config/taffybar/

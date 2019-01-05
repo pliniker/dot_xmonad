@@ -7,6 +7,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Grid (Grid(..))
@@ -42,6 +43,8 @@ myManageHook = composeAll
   , className =? "Gimp" --> doFloat
   , className =? "XCalc" --> doFloat
   , className =? "XMessage" --> doFloat
+  , appName =? "gnome-calculator" --> doFloat
+  , className =? "monitor" --> doRectFloat (W.RationalRect 0.7 0.1 0.25 0.8) 
   ]
 
 -- Key bindings
@@ -83,4 +86,4 @@ main = do
   dbus <- connectSession
   monitors <- countScreens
   spawn "~/.xmonad/xsession"
-  xmonad $ withUrgencyHook NoUrgencyHook $ docks $ ewmh $ pagerHints $ conf monitors dbus 
+  xmonad $ withUrgencyHook NoUrgencyHook $ docks $ ewmh $ pagerHints $ conf monitors dbus
