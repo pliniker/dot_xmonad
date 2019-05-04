@@ -24,7 +24,7 @@ cat gnome-term.conf | dconf load /org/gnome/terminal/legacy/profiles:/
 #
 pip3 install --user powerline-status
 
-#REPO_ROOT=~/.local/lib/python3.6/site-packages/ 
+#REPO_ROOT=~/.local/lib/python3.7/site-packages/ 
 #echo set fish_function_path \$fish_function_path "$REPO_ROOT/powerline/bindings/fish" >> ~/.config/fish/config.fish
 #echo powerline-setup >> ~/.config/fish/config.fish
 
