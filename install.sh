@@ -1,8 +1,16 @@
 #!/bin/bash -ex
 
+#
+# Setup Debian repos
+#
+sudo cp -r debian/apt/ /etc/
+
+#
+# Install environment
+#
 sudo apt install -y \
-    git openssh-server fish htop curl build-essential emacs vim-nox \
-    xmonad taffybar dmenu gnome-flashback gnome-session-flashback gnome-terminal gnome-tweak-tool gnote nitrogen formiko \
+    git openssh-server fish htop curl build-essential emacs-nox vim-nox \
+    xmonad taffybar/unstable dmenu gnome-flashback gnome-session-flashback gnome-terminal gnome-tweak-tool gnote nitrogen formiko \
     ibam powertop tlp
 
 #
@@ -23,10 +31,6 @@ cat gnome-term.conf | dconf load /org/gnome/terminal/legacy/profiles:/
 # Install powerline, adjusting REPO_ROOT as appropriate
 #
 pip3 install --user powerline-status
-
-#REPO_ROOT=~/.local/lib/python3.7/site-packages/ 
-#echo set fish_function_path \$fish_function_path "$REPO_ROOT/powerline/bindings/fish" >> ~/.config/fish/config.fish
-#echo powerline-setup >> ~/.config/fish/config.fish
 
 #
 # Handy scripts

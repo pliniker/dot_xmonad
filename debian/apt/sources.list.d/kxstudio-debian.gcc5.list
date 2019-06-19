@@ -1,0 +1,8 @@
+deb http://ppa.launchpad.net/kxstudio-debian/gcc5/ubuntu wily main
+#deb-src http://ppa.launchpad.net/kxstudio-debian/gcc5/ubuntu wily main
+
+deb http://ppa.launchpad.net/kxstudio-debian/gcc5/ubuntu xenial main
+#deb-src http://ppa.launchpad.net/kxstudio-debian/gcc5/ubuntu xenial main
+
+deb http://ppa.launchpad.net/kxstudio-debian/gcc5-deps/ubuntu xenial main
+#deb-src http://ppa.launchpad.net/kxstudio-debian/gcc5-deps/ubuntu xenial main
