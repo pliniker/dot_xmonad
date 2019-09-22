@@ -55,3 +55,8 @@ git clone git@github.com/pliniker/dot_spacemacs ~/.spacemacs.d
 # https://www.gnu.org/software/emacs/manual/html_mono/efaq.html#Colors-on-a-TTY
 #
 tic -x -o ~/.terminfo terminfo-24bit.src
+
+#
+# Install tools
+#
+cargo install battop
