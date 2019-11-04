@@ -45,3 +45,24 @@ cp fish/config.fish ~/.config/fish/
 #
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 git clone git@github.com/pliniker/dot_spacemacs ~/.spacemacs.d
+
+#
+# Enable explicit true color terminal
+# https://www.gnu.org/software/emacs/manual/html_mono/efaq.html#Colors-on-a-TTY
+#
+cat <<EOF > terminfo-24bit.src
+# Use colon separators.
+xterm-24bit|xterm with 24-bit direct color mode,
+ use=xterm-256color,
+ setb24=\E[48:2:%p1%{65536}%/%d:%p1%{256}%/%{255}%&%d:%p1%{255}%&%dm,
+ setf24=\E[38:2:%p1%{65536}%/%d:%p1%{256}%/%{255}%&%d:%p1%{255}%&%dm,
+# Use semicolon separators.
+xterm-24bits|xterm with 24-bit direct color mode,
+ use=xterm-256color,
+ setb24=\E[48;2;%p1%{65536}%/%d;%p1%{256}%/%{255}%&%d;%p1%{255}%&%dm,
+ setf24=\E[38;2;%p1%{65536}%/%d;%p1%{256}%/%{255}%&%d;%p1%{255}%&%dm,
+EOF
+
+tic -x -o ~/.terminfo terminfo-24bit.src
+# do this for fish too
+export TERM=xterm-24bit
