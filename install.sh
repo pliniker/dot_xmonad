@@ -10,7 +10,7 @@ sudo cp -r debian/apt/ /etc/
 #
 sudo apt install -y \
     git openssh-server fish htop curl build-essential emacs-nox vim-nox \
-    xmonad taffybar/unstable dmenu gnome-flashback gnome-session-flashback gnome-terminal gnome-tweak-tool gnote nitrogen formiko \
+    xmonad taffybar dmenu gnome-flashback gnome-session-flashback gnome-terminal gnome-tweak-tool gnote nitrogen formiko \
     ibam powertop tlp
 
 #

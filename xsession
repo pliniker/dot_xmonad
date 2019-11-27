@@ -47,5 +47,4 @@ xsetroot -cursor_name left_ptr
 # install taffybar config and launch
 mkdir -p ~/.config/taffybar/
 ln -sf ~/.xmonad/taffybar.hs ~/.config/taffybar/taffybar.hs
-ln -sf ~/.xmonad/taffybar.css ~/.config/taffybar/taffybar.css
 exec taffybar
