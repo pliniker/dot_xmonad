@@ -11,6 +11,7 @@ import System.Taffybar.Pager (colorize, escape)
 import System.Taffybar.SimpleClock
 import System.Taffybar.Systray
 import System.Taffybar.TaffyPager
+import System.Taffybar.Pager
 import System.Taffybar.Text.MemoryMonitor
 import System.Taffybar.Weather
 import System.Taffybar.Widgets.PollingGraph
@@ -20,6 +21,21 @@ memCallback = do
   mi <- parseMeminfo
   return $ map ((/memoryTotal mi) . ($ mi)) [ memoryBuffer, memoryCache ]
 
+blank _ = ""
+
+small s = "<span font_size='x-small'>" ++ s ++ "</span>"
+
+pagerConfig   = defaultPagerConfig
+                { activeWindow     = colorize "#f8f8f8" "black" . escape . shorten 40
+                , activeLayout     = colorize "DarkOrange" "black" . wrap "[" "]" . escape
+                , activeWorkspace  = colorize "black" "LightSkyBlue4" . wrap "[" "]" . escape
+                , hiddenWorkspace  = colorize "black" "SkyBlue4" . small . escape
+                , emptyWorkspace   = colorize "#777777" "black" . small . escape
+                , visibleWorkspace = wrap "(" ")" . escape
+                , urgentWorkspace  = colorize "#f8f8f8" "red4" . escape
+                , widgetSep        = " / "
+                }
+
 main = do
   let cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1), (1, 0, 1, 0.5)]
                                   , graphLabel = Just "cpu"
@@ -28,8 +44,7 @@ main = do
                                   , graphLabel = Just "mem"
                                   }
       clock = textClockNew Nothing "<span fgcolor='lightgray'>%a %b %_d %H:%M</span>" 1
-      pagerconfig = defaultPagerConfig { emptyWorkspace = colorize "lightgray" "" . escape }
-      pager = taffyPagerHUDNew pagerconfig (hudFromPagerConfig pagerconfig)
+      pager = taffyPagerHUDNew pagerConfig (hudFromPagerConfig pagerConfig)
       tray = systrayNew
       cpu = cpuMonitorNew cpuCfg 2.0 "cpu"
       mem = pollingGraphNew memCfg 4.0 memCallback
@@ -41,4 +56,5 @@ main = do
                                                        , mem
                                                        , cpu
                                                        ]
+                                        , barHeight = 35
                                         }
