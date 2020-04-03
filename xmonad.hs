@@ -3,6 +3,7 @@ import System.Exit(ExitCode(ExitSuccess), exitWith)
 
 import XMonad
 import XMonad.Config.Gnome
+import XMonad.Actions.CopyWindow
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -44,7 +45,7 @@ myManageHook = composeAll
   , className =? "XCalc" --> doFloat
   , className =? "XMessage" --> doFloat
   , appName =? "gnome-calculator" --> doFloat
-  , className =? "monitor" --> doRectFloat (W.RationalRect 0.7 0.1 0.25 0.8) 
+  , className =? "monitor" --> doRectFloat (W.RationalRect 0.7 0.1 0.25 0.8)
   ]
 
 -- Key bindings
@@ -52,12 +53,14 @@ myKeys = [ ("M-b", sendMessage ToggleStruts)
          , ("C-M1-l", spawn "gnome-screensaver-command -l")
          , ("C-M-M1-q", spawn "xmonad --recompile && xmonad --restart")
          , ("C-M-S-q", spawn "gnome-session-quit")
+         , ("M-s", windows copyToAll) -- Make focused window sticky
+         , ("M-S-s", killAllOtherCopies) -- Unstick window
          ]
 
 -- Workspace keys
 wsKeys = [((m .|. mod4Mask, k), windows $ onCurrentScreen f i)
-              | (i, k) <- zip wsNames ([xK_1 .. xK_9] ++ [xK_0])
-              , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+         | (i, k) <- zip wsNames ([xK_1 .. xK_9] ++ [xK_0])
+         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
          ]
 
 -- Remove these keybindings
@@ -75,8 +78,7 @@ conf monitors dbus = defaultConfig
   , handleEventHook = fullscreenEventHook
   , workspaces = withScreens monitors wsNames
   , layoutHook = myLayoutHook
-  , manageHook = manageDocks <+> myManageHook
-                 <+> manageHook defaultConfig
+  , manageHook = manageDocks <+> myManageHook <+> doFloat <+> manageHook defaultConfig
   }
   `additionalKeysP` myKeys
   `additionalKeys` wsKeys
