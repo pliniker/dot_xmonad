@@ -62,6 +62,12 @@ git clone git@github.com/pliniker/dot_spacevim_d ~/.SpaceVim.d
 pip3 install --user 'python-language-server[all]'
 
 #
+# Install neovim
+#
+curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -o ~/bin/nvim
+chmod +x ~/bin/nvim
+
+#
 # Install vanilla vimrc
 #
 cp vimrc ~/.vimrc-vim.nox

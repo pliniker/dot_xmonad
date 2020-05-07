@@ -18,4 +18,4 @@ alias hy="hy --repl-output-fn=hy.contrib.hy-repr.hy-repr"
 alias emacs="env TERM=xterm-24bit /usr/bin/emacs"
 
 # vanilla vim, don't load spacevim
-alias vim="vim.nox -u ~/.vimrc-vim.nox"
+alias vim="nvim -u ~/.vimrc-vim.nox"
