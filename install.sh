@@ -51,6 +51,21 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 git clone git@github.com/pliniker/dot_spacemacs ~/.spacemacs.d
 
 #
+# Install spacevim
+#
+curl -sLf https://spacevim.org/install.sh | bash
+git clone git@github.com/pliniker/dot_spacevim_d ~/.SpaceVim.d
+
+#
+# Install python deps
+#
+pip3 install --user 'python-language-server[all]'
+
+#
+# Install vanilla vimrc
+#
+cp vimrc ~/.vimrc-vim.nox
+
 # Enable explicit true color terminal
 # https://www.gnu.org/software/emacs/manual/html_mono/efaq.html#Colors-on-a-TTY
 #
