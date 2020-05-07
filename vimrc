@@ -31,4 +31,4 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-nmap <Esc>q :qa<cr>
+nmap <A-q> :qa<Enter>
