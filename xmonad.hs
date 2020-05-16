@@ -3,6 +3,7 @@ import System.Exit(ExitCode(ExitSuccess), exitWith)
 
 import XMonad
 import XMonad.Config.Gnome
+import XMonad.Actions.CopyWindow
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -53,6 +54,8 @@ myKeys = [ ("M-b", sendMessage ToggleStruts)
          , ("C-M1-l", spawn "gnome-screensaver-command -l")
          , ("C-M-M1-q", spawn "xmonad --recompile && xmonad --restart")
          , ("C-M-S-q", spawn "gnome-session-quit")
+         , ("M-s", windows copyToAll) -- Make focused window sticky
+         , ("M-S-s", killAllOtherCopies) -- Unstick window
          ]
 
 -- Workspace keys
@@ -76,8 +79,7 @@ conf monitors dbus = defaultConfig
   , handleEventHook = fullscreenEventHook
   , workspaces = withScreens monitors wsNames
   , layoutHook = myLayoutHook
-  , manageHook = manageDocks <+> myManageHook
-                 <+> manageHook defaultConfig
+  , manageHook = manageDocks <+> myManageHook <+> doFloat <+> manageHook defaultConfig
   }
   `additionalKeysP` myKeys
   `additionalKeys` wsKeys
