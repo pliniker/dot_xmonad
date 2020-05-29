@@ -1,5 +1,12 @@
 #!/bin/bash -x
 
+# quit this script immediately if taffybar is already running to avoid
+# rerunning all the below apps, commands and scripts if they already
+# were run
+if pgrep taffybar > /dev/null ; then
+    exit 0
+fi
+
 # run gnome daemons in the background
 if [ -x /usr/bin/gnome-flashback ] ; then
     gnome-flashback &

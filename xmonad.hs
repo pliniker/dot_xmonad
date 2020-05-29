@@ -40,11 +40,11 @@ myLayoutHook = avoidStruts $ smartBorders ( tabbed ||| grid ||| full ||| tiled |
 
 -- Window management
 myManageHook = composeAll
-  [ className =? "Vlc" --> doFloat
-  , className =? "Gimp" --> doFloat
-  , className =? "XCalc" --> doFloat
-  , className =? "XMessage" --> doFloat
-  , appName =? "gnome-calculator" --> doFloat
+  [ className =? "Vlc" --> doCenterFloat
+  , className =? "Gimp" --> doCenterFloat
+  , className =? "XCalc" --> doCenterFloat
+  , className =? "XMessage" --> doCenterFloat
+  , appName =? "gnome-calculator" --> doCenterFloat
   , className =? "monitor" --> doRectFloat (W.RationalRect 0.7 0.1 0.25 0.8)
   ]
 
@@ -78,7 +78,7 @@ conf monitors dbus = defaultConfig
   , handleEventHook = fullscreenEventHook
   , workspaces = withScreens monitors wsNames
   , layoutHook = myLayoutHook
-  , manageHook = manageDocks <+> myManageHook <+> doFloat <+> manageHook defaultConfig
+  , manageHook = manageDocks <+> myManageHook <+> doCenterFloat <+> manageHook defaultConfig
   }
   `additionalKeysP` myKeys
   `additionalKeys` wsKeys
