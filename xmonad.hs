@@ -19,7 +19,8 @@ import qualified XMonad.StackSet as W
 import XMonad.Layout.IndependentScreens
 import XMonad.Util.WorkspaceCompare
 
-import System.Taffybar.Hooks.PagerHints (pagerHints)
+-- import System.Taffybar.Hooks.PagerHints (pagerHints)
+import System.Taffybar.Support.PagerHints (pagerHints)
 
 import DBus
 import DBus.Client
@@ -71,7 +72,7 @@ remKeys = [ "M-q"
 -- Configuration
 conf monitors dbus = defaultConfig
   { modMask = mod4Mask
-  , terminal = "gnome-terminal"
+  , terminal = "alacritty"
   , borderWidth = 4
   , normalBorderColor = "#701B3B"
   , focusedBorderColor = "#41AD82"
