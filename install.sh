@@ -16,8 +16,11 @@ sudo apt install -y \
 #
 # Setup gnome flashback session manager, prevent nautilus from auto-starting
 #
-sudo cp gnome-flashback-xmonad.session /usr/share/gnome-session/sessions/
-sudo rm /etc/xdg/autostart/*nautilus*
+sudo cp gnome/gnome-flashback-xmonad-custom.desktop /usr/share/xsessions/
+sudo cp gnome/gnome-flashback-xmonad-custom.session /usr/share/gnome-session/sessions/
+sudo cp gnome/gnome-flashback-xmonad-custom /usr/lib/gnome-flashback/
+sudo cp gnome/xmonad-custom.desktop /usr/share/applications/
+# run dconf-editor and tweak under org.gnome.gnome-flashback
 
 #
 # Install gnome-terminal profiles

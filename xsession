@@ -7,21 +7,6 @@ if pgrep taffybar > /dev/null ; then
     exit 0
 fi
 
-# run gnome daemons in the background
-if [ -x /usr/bin/gnome-flashback ] ; then
-    gnome-flashback &
-fi
-
-# run a custom monitor script
-if [ -x ~/.xrandr.sh ] ; then
-    ~/.xrandr.sh
-fi
-
-# run a custom desktop wallpaper script
-if [ -x ~/.wallpaper.sh ] ; then
-    ~/.wallpaper.sh
-fi
-
 if [ -x /usr/bin/keychain ] ; then
     keychain
 fi
@@ -46,7 +31,10 @@ setxkbmap -option ctrl:nocaps
 xmodmap -e "keysym Print = Menu"
 
 # transparency
-compton -CGb -i 0.9
+# compton -CGb -i 0.9
+
+# background
+nitrogen --restore
 
 # set cursor shape
 xsetroot -cursor_name left_ptr
@@ -55,4 +43,7 @@ xsetroot -cursor_name left_ptr
 mkdir -p ~/.config/taffybar/
 ln -sf ~/.xmonad/taffybar.hs ~/.config/taffybar/taffybar.hs
 ln -sf ~/.xmonad/taffybar.css ~/.config/taffybar/taffybar.css
-exec taffybar
+taffybar &
+
+# run gnome daemons in the background
+exec gnome-flashback

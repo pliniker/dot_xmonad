@@ -47,24 +47,26 @@ main = do
         defaultWorkspacesConfig
         { maxIcons = Just 0 }
       workspaces = workspacesNew myWorkspacesConfig
-      cpu = pollingGraphNew cpuCfg 2 cpuCallback
-      mem = pollingGraphNew memCfg 2 memCallback
-      clock = textClockNew Nothing "%a %b %_d %H:%M" 1
+      cpu = pollingGraphNew cpuCfg 3 cpuCallback
+      mem = pollingGraphNew memCfg 3 memCallback
+      clock = textClockNew Nothing "%a %b %_d %H:%M" 60
       layout = layoutNew defaultLayoutConfig
       windows = windowsNew defaultWindowsConfig
-      battText = textBatteryNew "$percentage$% $time$"
+      -- battText = textBatteryNew "$percentage$% $time$"
+      -- tray = sniTrayThatStartsWatcherEvenThoughThisIsABadWayToDoIt
       myConfig = defaultSimpleTaffyConfig
         { startWidgets =
             workspaces : map (>>= buildContentsBox) [ layout, windows ]
         , endWidgets = map (>>= buildContentsBox)
-          [ battText
-          , clock
+          -- [ battText
+          [ clock
+          -- , tray
           , cpu
           , mem
           ]
         , barPosition = Top
         , barPadding = 0
-        , barHeight = 25
+        , barHeight = 30
         , widgetSpacing = 5
         }
   dyreTaffybar $ withBatteryRefresh $ withLogServer $ withToggleServer $

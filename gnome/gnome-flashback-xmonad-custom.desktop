@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=GNOME Flashback (XMonad Custom)
+Comment=This session logs you into GNOME Flashback with XMonad Custom
+Exec=/usr/lib/gnome-flashback/gnome-flashback-xmonad-custom
+#TryExec=metacity
+Type=Application
+DesktopNames=GNOME-Flashback;GNOME;
+X-Ubuntu-Gettext-Domain=gnome-flashback

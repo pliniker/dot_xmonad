@@ -14,6 +14,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Grid (Grid(..))
 import XMonad.Layout.Tabbed (simpleTabbed)
 import XMonad.Util.EZConfig
+import XMonad.Util.Replace
 import XMonad.Util.Run(spawnPipe)
 import qualified XMonad.StackSet as W
 import XMonad.Layout.IndependentScreens
@@ -51,7 +52,8 @@ myManageHook = composeAll
 
 -- Key bindings
 myKeys = [ ("M-b", sendMessage ToggleStruts)
-         , ("C-M1-l", spawn "gnome-screensaver-command -l")
+         , ("M-p", spawn "dmenu_run")
+         , ("M-l", spawn "gnome-screensaver-command -l")
          , ("C-M-M1-q", spawn "xmonad --recompile && xmonad --restart")
          , ("C-M-S-q", spawn "gnome-session-quit")
          , ("M-s", windows copyToAll) -- Make focused window sticky
@@ -70,7 +72,7 @@ remKeys = [ "M-q"
           ]
 
 -- Configuration
-conf monitors dbus = defaultConfig
+conf monitors dbus = gnomeConfig
   { modMask = mod4Mask
   , terminal = "alacritty"
   , borderWidth = 4
@@ -86,6 +88,7 @@ conf monitors dbus = defaultConfig
   `removeKeysP` remKeys
 
 main = do
+  replace
   dbus <- connectSession
   monitors <- countScreens
   spawn "~/.xmonad/xsession"

@@ -1,11 +1,11 @@
 @define-color transparent rgba(0.0, 0.0, 0.0, 0.0);
-@define-color white #AFAFAF;
+@define-color white #FFFFFF;
 @define-color black #000000;
 @define-color taffy-blue #0c7cd5;
 
 @define-color active-window-color @white;
 @define-color urgent-window-color @taffy-blue;
-@define-color font-color @black;
+@define-color font-color @white;
 @define-color menu-background-color @white;
 @define-color menu-font-color @black;
 
@@ -13,51 +13,51 @@
 
 .taffy-window * {
 	/*
-	   This removes any existing styling from UI elements. Taffybar will not cohere
-	   with your gtk theme.
-   */
+		This removes any existing styling from UI elements. Taffybar will not
+		cohere with your gtk theme.
+	*/
 	all: unset;
 
-	font-family: "Hack", sans-serif;
-	font-size: 8pt;
+	font-family: "Noto Sans", sans-serif;
+	font-size: 10pt;
 	color: @font-color;
-	background-color: @white;
 }
 
 .taffy-box {
-	border-radius: 1px;
-	background-color: @white;
+	border-radius: 10px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.3);
 }
 
 .inner-pad {
-	padding-bottom: 0px;
-	padding-top: 0px;
+	padding-bottom: 5px;
+	padding-top: 5px;
 	padding-left: 2px;
 	padding-right: 2px;
 }
 
 .contents {
-	padding-bottom: 1px;
-	padding-top: 1px;
-	padding-right: 1px;
-	padding-left: 1px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	padding-right: 2px;
+	padding-left: 2px;
 	transition: background-color .5s;
+	border-radius: 5px;
 }
 
 /* Workspaces styling */
 
 .workspace-label {
-	padding-right: 1px;
-	padding-left: 1px;
-	font-size: 8pt;
+	padding-right: 3px;
+	padding-left: 2px;
+/*	font-size: 12pt; */
 }
 
 .active .contents {
-	background-color: rgba(0.0, 1.0, 0.0, 0.5);
+	background-color: rgba(1.0, 0.0, 0.0, 1.0);
 }
 
 .visible .contents {
-	background-color: rgba(1.0, 0.0, 0.0, 0.5);
+	background-color: rgba(0.0, 0.2, 0.8, 1.0);
 }
 
 .window-icon-container {
@@ -82,7 +82,7 @@
 }
 
 .window-icon-container.inactive .window-icon {
-  padding: 0px;
+	padding: 0px;
 }
 
 .window-icon-container.minimized .window-icon {
