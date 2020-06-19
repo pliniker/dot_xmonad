@@ -52,14 +52,14 @@ main = do
       clock = textClockNew Nothing "%a %b %_d %H:%M" 60
       layout = layoutNew defaultLayoutConfig
       windows = windowsNew defaultWindowsConfig
-      -- battText = textBatteryNew "$percentage$% $time$"
+      battText = textBatteryNew "$percentage$% $time$"
       -- tray = sniTrayThatStartsWatcherEvenThoughThisIsABadWayToDoIt
       myConfig = defaultSimpleTaffyConfig
         { startWidgets =
             workspaces : map (>>= buildContentsBox) [ layout, windows ]
         , endWidgets = map (>>= buildContentsBox)
-          -- [ battText
-          [ clock
+          [ battText
+          , clock
           -- , tray
           , cpu
           , mem

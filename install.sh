@@ -10,7 +10,7 @@ sudo cp -r debian/apt/ /etc/
 #
 sudo apt install -y \
     git openssh-server fish htop curl build-essential emacs-nox vim-nox \
-    xmonad taffybar dmenu gnome-flashback gnome-session-flashback gnome-terminal gnome-tweak-tool gnote nitrogen formiko \
+    xmonad taffybar dmenu gnome-flashback gnome-session-flashback gnome-terminal gnome-tweak-tool gnote nitrogen \
     ibam powertop tlp
 
 #
@@ -20,7 +20,6 @@ sudo cp gnome/gnome-flashback-xmonad-custom.desktop /usr/share/xsessions/
 sudo cp gnome/gnome-flashback-xmonad-custom.session /usr/share/gnome-session/sessions/
 sudo cp gnome/gnome-flashback-xmonad-custom /usr/lib/gnome-flashback/
 sudo cp gnome/xmonad-custom.desktop /usr/share/applications/
-# run dconf-editor and tweak under org.gnome.gnome-flashback
 
 #
 # Install gnome-terminal profiles
@@ -31,9 +30,9 @@ sudo cp gnome/xmonad-custom.desktop /usr/share/applications/
 cat gnome-term.conf | dconf load /org/gnome/terminal/legacy/profiles:/
 
 #
-# Install powerline, adjusting REPO_ROOT as appropriate
+# Install alacritty
 #
-pip3 install --user powerline-status
+# https://github.com/alacritty/alacritty/releases/latest
 
 #
 # Handy scripts
@@ -50,7 +49,7 @@ cp fish/config.fish ~/.config/fish/
 #
 # Install spacemacs
 #
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+git clone https://github.com/syl20bnr/spacemacs -b develop ~/.emacs.d
 git clone git@github.com/pliniker/dot_spacemacs ~/.spacemacs.d
 
 #
@@ -62,6 +61,7 @@ git clone git@github.com/pliniker/dot_spacevim_d ~/.SpaceVim.d
 #
 # Install python deps
 #
+pip3 install --user powerline-status
 pip3 install --user 'python-language-server[all]'
 
 #
@@ -81,6 +81,7 @@ cp vimrc ~/.vimrc-vim.nox
 tic -x -o ~/.terminfo terminfo-24bit.src
 
 #
-# Install tools
+# Install rust
 #
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install battop

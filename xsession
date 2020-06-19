@@ -31,7 +31,7 @@ setxkbmap -option ctrl:nocaps
 xmodmap -e "keysym Print = Menu"
 
 # transparency
-# compton -CGb -i 0.9
+compton -CGb -i 0.9
 
 # background
 nitrogen --restore
@@ -46,4 +46,7 @@ ln -sf ~/.xmonad/taffybar.css ~/.config/taffybar/taffybar.css
 taffybar &
 
 # run gnome daemons in the background
+gsettings set org.gnome.gnome-flashback desktop false
+gsettings set org.gnome.gnome-flashback.desktop show-icons false
+gsettings set org.gnome.gnome-flashback.desktop draw-background false
 exec gnome-flashback
