@@ -33,6 +33,7 @@ cat gnome-term.conf | dconf load /org/gnome/terminal/legacy/profiles:/
 # Install alacritty
 #
 # https://github.com/alacritty/alacritty/releases/latest
+cp -r alacritty ~/.config/
 
 #
 # Handy scripts

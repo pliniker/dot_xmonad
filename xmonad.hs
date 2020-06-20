@@ -53,7 +53,7 @@ myManageHook = composeAll
 -- Key bindings
 myKeys = [ ("M-b", sendMessage ToggleStruts)
          , ("M-p", spawn "dmenu_run")
-         , ("M-l", spawn "gnome-screensaver-command -l")
+         , ("C-M1-l", spawn "gnome-screensaver-command -l")
          , ("C-M-M1-q", spawn "xmonad --recompile && xmonad --restart")
          , ("C-M-S-q", spawn "gnome-session-quit")
          , ("M-s", windows copyToAll) -- Make focused window sticky
@@ -74,7 +74,7 @@ remKeys = [ "M-q"
 -- Configuration
 conf monitors dbus = gnomeConfig
   { modMask = mod4Mask
-  , terminal = "alacritty"
+  , terminal = "gnome-terminal"
   , borderWidth = 4
   , normalBorderColor = "#701B3B"
   , focusedBorderColor = "#41AD82"
