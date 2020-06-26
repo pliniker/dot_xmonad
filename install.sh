@@ -44,13 +44,13 @@ cp fish/config.fish ~/.config/fish/
 # Install spacemacs
 #
 git clone https://github.com/syl20bnr/spacemacs -b develop ~/.emacs.d
-git clone git@github.com/pliniker/dot_spacemacs ~/.spacemacs.d
+git clone git@github.com:pliniker/dot_spacemacs_d ~/.spacemacs.d
 
 #
 # Install spacevim
 #
 curl -sLf https://spacevim.org/install.sh | bash
-git clone git@github.com/pliniker/dot_spacevim_d ~/.SpaceVim.d
+git clone git@github.com:pliniker/dot_spacevim_d ~/.SpaceVim.d
 
 #
 # Install python deps
