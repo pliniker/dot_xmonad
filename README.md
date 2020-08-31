@@ -1,9 +1,4 @@
-# My xmonad configuration
-
-* works with gnome-flashback, xmonad and taffybar 3.0.0 from apt in Ubuntu 20.04
+# WSL 1 on Windows 10 config
 
 See `install.sh`
 
-Notes:
-
-* emacs 24bit terminal is broken
