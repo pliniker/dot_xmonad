@@ -10,6 +10,7 @@ sudo apt install -y git openssh-server fish htop curl build-essential vim-nox
 #
 # https://github.com/alacritty/alacritty/releases/latest
 cp -r alacritty ~/.config/
+# cp -r alacritty %APP_DATA%/
 
 #
 # Fish shell config
@@ -40,8 +41,8 @@ chmod +x ~/bin/nvim
 #
 cp vimrc ~/.vimrc-vim.nox
 
+#
 # Enable explicit true color terminal
 # https://www.gnu.org/software/emacs/manual/html_mono/efaq.html#Colors-on-a-TTY
 #
 tic -x -o ~/.terminfo terminfo-24bit.src
-
