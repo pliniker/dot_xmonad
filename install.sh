@@ -11,7 +11,7 @@ sudo cp -r debian/apt/ /etc/
 sudo apt install -y \
     git openssh-server fish htop curl build-essential emacs-nox vim-nox \
     xmonad taffybar dmenu gnome-flashback gnome-session-flashback gnome-terminal gnome-tweak-tool gnote nitrogen \
-    ibam powertop tlp
+    ibam powertop tlp neovim
 
 #
 # Setup gnome flashback session manager, prevent nautilus from auto-starting
@@ -51,25 +51,18 @@ cp fish/config.fish ~/.config/fish/
 # Install spacemacs
 #
 git clone https://github.com/syl20bnr/spacemacs -b develop ~/.emacs.d
-git clone git@github.com/pliniker/dot_spacemacs ~/.spacemacs.d
+git clone git@github.com:pliniker/dot_spacemacs ~/.spacemacs.d
 
 #
 # Install spacevim
 #
 curl -sLf https://spacevim.org/install.sh | bash
-git clone git@github.com/pliniker/dot_spacevim_d ~/.SpaceVim.d
+git clone git@github.com:pliniker/dot_spacevim_d ~/.SpaceVim.d
 
 #
 # Install python deps
 #
-pip3 install --user powerline-status
 pip3 install --user 'python-language-server[all]'
-
-#
-# Install neovim
-#
-curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -o ~/bin/nvim
-chmod +x ~/bin/nvim
 
 #
 # Install vanilla vimrc
@@ -86,3 +79,5 @@ tic -x -o ~/.terminfo terminfo-24bit.src
 #
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install battop
+cargo install ytop
+cargo install ripgrep

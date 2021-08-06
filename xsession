@@ -15,10 +15,6 @@ if [ -x ~/.dropbox-dist/dropboxd ] ; then
     ~/.dropbox-dist/dropboxd &
 fi
 
-if [ -x ~/.local/bin/powerline-daemon ] ; then
-    powerline-daemon
-fi
-
 # install fonts
 if [ ! -d ~/.fonts ] ; then
     mkdir -p ~/.fonts
@@ -49,4 +45,5 @@ taffybar &
 gsettings set org.gnome.gnome-flashback desktop false
 gsettings set org.gnome.gnome-flashback.desktop show-icons false
 gsettings set org.gnome.gnome-flashback.desktop draw-background false
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
 exec gnome-flashback
