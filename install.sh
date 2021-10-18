@@ -30,21 +30,9 @@ sudo cp gnome/xmonad-custom.desktop /usr/share/applications/
 cat gnome-term.conf | dconf load /org/gnome/terminal/legacy/profiles:/
 
 #
-# Install alacritty
-#
-# https://github.com/alacritty/alacritty/releases/latest
-cp -r alacritty ~/.config/
-
-#
-# Handy scripts
-#
-mkdir ~/bin/
-cp tools/* ~/bin/
-
-#
 # Fish shell config
 #
-mkdir -i ~/.config/fish/
+mkdir -p ~/.config/fish/
 cp fish/config.fish ~/.config/fish/
 
 #
@@ -54,19 +42,10 @@ git clone https://github.com/syl20bnr/spacemacs -b develop ~/.emacs.d
 git clone git@github.com:pliniker/dot_spacemacs ~/.spacemacs.d
 
 #
-# Install spacevim
+# Install vimrc
 #
-curl -sLf https://spacevim.org/install.sh | bash
-git clone git@github.com:pliniker/dot_spacevim_d ~/.SpaceVim.d
-
-#
-# Install python deps
-#
-pip3 install --user 'python-language-server[all]'
-
-#
-# Install vanilla vimrc
-#
+mkdir -p ~/.config/nvim/
+cp nvim/init.lua ~/.config/nvim/init.lua
 cp vimrc ~/.vimrc-vim.nox
 
 # Enable explicit true color terminal
@@ -78,6 +57,8 @@ tic -x -o ~/.terminfo terminfo-24bit.src
 # Install rust
 #
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install exa
 cargo install battop
-cargo install ytop
-cargo install ripgrep
+cargo install ripgrep   # or apt install it
+cargo install zellij    # or download it
+cargo install starship  # or download it
