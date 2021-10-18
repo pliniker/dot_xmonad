@@ -57,6 +57,10 @@ paq {'hrsh7th/vim-vsnip'}
 paq {'hrsh7th/nvim-cmp'}
 paq {'nvim-lua/plenary.nvim'}
 paq {'lewis6991/gitsigns.nvim'}
+paq {'simrat39/rust-tools.nvim'}
+
+require('gitsigns').setup()
+require('rust-tools').setup({})
 
 -- options
 cmd 'colorscheme OceanicNext'
@@ -132,9 +136,6 @@ local nvim_lsp = require('lspconfig')
 local lspfuzzy = require 'lspfuzzy'
 lspfuzzy.setup {}
 
--- other plugins
-require('gitsigns').setup()
-
 -- keybindings
 vim.api.nvim_set_keymap('n', '<A-q>', ':qa<Enter>', {noremap = true})
 
@@ -173,7 +174,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'terraformls' }
+local servers = { 'pyright', 'terraformls', 'rust_analyzer' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
