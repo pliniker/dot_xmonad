@@ -47,26 +47,16 @@ git clone https://github.com/syl20bnr/spacemacs -b develop ~/.emacs.d
 git clone git@github.com:pliniker/dot_spacemacs_d ~/.spacemacs.d
 
 #
-# Install spacevim
-#
-curl -sLf https://spacevim.org/install.sh | bash
-git clone git@github.com:pliniker/dot_spacevim_d ~/.SpaceVim.d
-
-#
-# Install python deps
-#
-pip3 install --user powerline-status
-pip3 install --user 'python-language-server[all]'
-
-#
 # Install neovim
 #
 curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -o ~/bin/nvim
 chmod +x ~/bin/nvim
 
 #
-# Install vanilla vimrc
+# Install vimrc
 #
+mkdir -p ~/.config/nvim/
+cp nvim/init.lua ~/.config/nvim/init.lua
 cp vimrc ~/.vimrc-vim.nox
 
 # Enable explicit true color terminal
@@ -78,4 +68,8 @@ tic -x -o ~/.terminfo terminfo-24bit.src
 # Install tools
 #
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install exa
 cargo install battop
+cargo install ripgrep   # or download
+cargo install zellij    # or download it
+cargo install starship  # or download
