@@ -120,7 +120,7 @@ opt.errorbells = false
 vim.api.nvim_set_keymap('n', '<A-q>', ':qa<Enter>', {noremap = true})
 
 -- completion
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
     snippet = {
