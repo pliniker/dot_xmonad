@@ -47,6 +47,7 @@ local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
+local map = vim.api.nvim_set_keymap
 
 -- plugins
 cmd 'packadd paq-nvim'               -- load the package manager
@@ -70,11 +71,14 @@ paq {'lewis6991/gitsigns.nvim'}
 paq {'simrat39/rust-tools.nvim'}
 paq {'kyazdani42/nvim-web-devicons'}
 paq {'hoob3rt/lualine.nvim'}
+paq {'romgrk/barbar.nvim'}
+paq {'kyazdani42/nvim-tree.lua'}
 
 require('gitsigns').setup()
 require('rust-tools').setup({})
 require('nvim-web-devicons').setup { default = true; }
 require('lualine').setup()
+require('nvim-tree').setup {}
 
 -- options
 cmd 'colorscheme OceanicNext'
@@ -83,6 +87,7 @@ opt.compatible = false
 opt.autoread = true
 
 opt.termguicolors = true
+opt.mouse = 'a'
 opt.number = true
 opt.relativenumber = true
 opt.ruler = true
@@ -115,10 +120,14 @@ opt.encoding = 'utf8'
 opt.visualbell = false
 opt.errorbells = false
 
-vim.api.nvim_set_keymap('n', '<A-q>', ':qa<Enter>', {noremap = true})
+local keymap_opts = { noremap = true, silent = true }
+
+map('n', '<A-q>', ':qa<Enter>', keymap_opts)
+map('n', '<Space>bb', ':Buffers<CR>', keymap_opts)
+map('n', '<Space>ff', ':NvimTreeToggle<CR>', keymap_opts)
 
 -- completion
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
     snippet = {
@@ -189,3 +198,32 @@ for _, lsp in ipairs(servers) do
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 end
+
+-- tab bar
+map('n', '<A-,>', ':BufferPrevious<CR>', keymap_opts)
+map('n', '<A-.>', ':BufferNext<CR>', keymap_opts)
+map('n', '<A-<>', ':BufferMovePrevious<CR>', keymap_opts)
+map('n', '<A->>', ':BufferMoveNext<CR>', keymap_opts)
+map('n', '<A-1>', ':BufferGoto 1<CR>', keymap_opts)
+map('n', '<A-2>', ':BufferGoto 2<CR>', keymap_opts)
+map('n', '<A-3>', ':BufferGoto 3<CR>', keymap_opts)
+map('n', '<A-4>', ':BufferGoto 4<CR>', keymap_opts)
+map('n', '<A-5>', ':BufferGoto 5<CR>', keymap_opts)
+map('n', '<A-6>', ':BufferGoto 6<CR>', keymap_opts)
+map('n', '<A-7>', ':BufferGoto 7<CR>', keymap_opts)
+map('n', '<A-8>', ':BufferGoto 8<CR>', keymap_opts)
+map('n', '<A-9>', ':BufferGoto 9<CR>', keymap_opts)
+map('n', '<A-0>', ':BufferLast<CR>', keymap_opts)
+map('n', '<A-c>', ':BufferClose<CR>', keymap_opts)
+map('n', '<Space>bn', ':BufferOrderByBufferNumber<CR>', keymap_opts)
+map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', keymap_opts)
+map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', keymap_opts)
+
+vim.g.bufferline = {
+  animation = false,
+  tabpages = true,
+  closable = true,
+  clickable = true,
+  icons = numbers,
+  insert_at_end = true,
+}
