@@ -31,6 +31,16 @@
 --
 -- Download Hashicorp terraform-ls, extract and place on $PATH
 --
+-- ### Rust
+--
+-- Download rust-analyzer and place on $PATH
+--
+-- ### Bash
+--
+-- ```
+-- NPM_CONFIG_PREFIX=~/.npm/modules npm install -g bash-language-server
+-- ```
+--
 
 -- shortcuts
 local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
@@ -58,9 +68,14 @@ paq {'hrsh7th/nvim-cmp'}
 paq {'nvim-lua/plenary.nvim'}
 paq {'lewis6991/gitsigns.nvim'}
 paq {'simrat39/rust-tools.nvim'}
+paq {'kyazdani42/nvim-web-devicons'}
+paq {'hoob3rt/lualine.nvim'}
+paq {'romgrk/barbar.nvim'}
 
 require('gitsigns').setup()
 require('rust-tools').setup({})
+require('nvim-web-devicons').setup { default = true; }
+require('lualine').setup()
 
 -- options
 cmd 'colorscheme OceanicNext'
@@ -69,6 +84,7 @@ opt.compatible = false
 opt.autoread = true
 
 opt.termguicolors = true
+opt.mouse = 'a'
 opt.number = true
 opt.relativenumber = true
 opt.ruler = true
@@ -101,6 +117,8 @@ opt.encoding = 'utf8'
 opt.visualbell = false
 opt.errorbells = false
 
+vim.api.nvim_set_keymap('n', '<A-q>', ':qa<Enter>', {noremap = true})
+
 -- completion
 local cmp = require'cmp'
 
@@ -115,7 +133,6 @@ cmp.setup({
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
-      ['<Esc>'] = cmp.mapping.close(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
       ['<Tab>'] = cmp.mapping.confirm({ select = true }),
     },
@@ -126,32 +143,21 @@ cmp.setup({
     }
 })
 
--- languages
-local ts = require 'nvim-treesitter.configs'
-ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+-- lsp
+require('nvim-treesitter.configs').setup {
+    ensure_installed = 'maintained', highlight = {enable = true}
+}
 
-local nvim_lsp = require('lspconfig')
+require('lspfuzzy').setup {}
 
-
-local lspfuzzy = require 'lspfuzzy'
-lspfuzzy.setup {}
-
--- keybindings
-vim.api.nvim_set_keymap('n', '<A-q>', ':qa<Enter>', {noremap = true})
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
   local opts = { noremap=true, silent=true }
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -169,12 +175,13 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'terraformls', 'rust_analyzer' }
+-- Call 'setup' on multiple servers and map buffer local keybindings 
+-- when the language server attaches
+local nvim_lsp = require('lspconfig')
+
+local servers = { 'bashls', 'pyright', 'terraformls', 'rust_analyzer' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -184,3 +191,36 @@ for _, lsp in ipairs(servers) do
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 end
+
+-- tab bar
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+map('n', '<A-,>', ':BufferPrevious<CR>', opts)
+map('n', '<A-.>', ':BufferNext<CR>', opts)
+map('n', '<A-<>', ':BufferMovePrevious<CR>', opts)
+map('n', '<A->>', ':BufferMoveNext<CR>', opts)
+map('n', '<A-1>', ':BufferGoto 1<CR>', opts)
+map('n', '<A-2>', ':BufferGoto 2<CR>', opts)
+map('n', '<A-3>', ':BufferGoto 3<CR>', opts)
+map('n', '<A-4>', ':BufferGoto 4<CR>', opts)
+map('n', '<A-5>', ':BufferGoto 5<CR>', opts)
+map('n', '<A-6>', ':BufferGoto 6<CR>', opts)
+map('n', '<A-7>', ':BufferGoto 7<CR>', opts)
+map('n', '<A-8>', ':BufferGoto 8<CR>', opts)
+map('n', '<A-9>', ':BufferGoto 9<CR>', opts)
+map('n', '<A-0>', ':BufferLast<CR>', opts)
+map('n', '<A-c>', ':BufferClose<CR>', opts)
+map('n', '<Space>bb', ':Buffers<CR>', opts)
+map('n', '<Space>bn', ':BufferOrderByBufferNumber<CR>', opts)
+map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', opts)
+map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', opts)
+
+vim.g.bufferline = {
+  animation = false,
+  tabpages = true,
+  closable = true,
+  clickable = true,
+  icons = numbers,
+  insert_at_end = true,
+}
