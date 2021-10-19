@@ -59,7 +59,6 @@ paq {'nvim-treesitter/nvim-treesitter'}
 paq {'neovim/nvim-lspconfig'}
 paq {'glepnir/lspsaga.nvim'}
 paq {'junegunn/fzf', run = fn['fzf#install']}
-paq {'junegunn/fzf.vim'}
 paq {'ojroques/nvim-lspfuzzy'}
 paq {'hrsh7th/cmp-nvim-lsp'}
 paq {'hrsh7th/cmp-buffer'}
@@ -71,14 +70,12 @@ paq {'lewis6991/gitsigns.nvim'}
 paq {'simrat39/rust-tools.nvim'}
 paq {'kyazdani42/nvim-web-devicons'}
 paq {'hoob3rt/lualine.nvim'}
-paq {'romgrk/barbar.nvim'}
-paq {'kyazdani42/nvim-tree.lua'}
+paq {'nvim-telescope/telescope.nvim'}
 
-require('gitsigns').setup()
-require('rust-tools').setup({})
 require('nvim-web-devicons').setup { default = true; }
+require('gitsigns').setup()
 require('lualine').setup()
-require('nvim-tree').setup {}
+require('rust-tools').setup({})
 
 -- options
 cmd 'colorscheme OceanicNext'
@@ -123,8 +120,10 @@ opt.errorbells = false
 local keymap_opts = { noremap = true, silent = true }
 
 map('n', '<A-q>', ':qa<Enter>', keymap_opts)
-map('n', '<Space>bb', ':Buffers<CR>', keymap_opts)
-map('n', '<Space>ff', ':NvimTreeToggle<CR>', keymap_opts)
+map('n', '<Space>bb', ':Telescope buffers<CR>', keymap_opts)
+map('n', '<Space>fb', ':Telescope find_files<CR>', keymap_opts)
+map('n', '<Space>ff', ':Telescope git_files<CR>', keymap_opts)
+map('n', '<Space>fg', ':Telescope live_grep<CR>', keymap_opts)
 
 -- completion
 local cmp = require('cmp')
@@ -170,18 +169,18 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '<Space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<Space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<Space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<Space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<Space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<Space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<Space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<Space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<Space>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
 -- Call 'setup' on multiple servers and map buffer local keybindings 
@@ -198,32 +197,3 @@ for _, lsp in ipairs(servers) do
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 end
-
--- tab bar
-map('n', '<A-,>', ':BufferPrevious<CR>', keymap_opts)
-map('n', '<A-.>', ':BufferNext<CR>', keymap_opts)
-map('n', '<A-<>', ':BufferMovePrevious<CR>', keymap_opts)
-map('n', '<A->>', ':BufferMoveNext<CR>', keymap_opts)
-map('n', '<A-1>', ':BufferGoto 1<CR>', keymap_opts)
-map('n', '<A-2>', ':BufferGoto 2<CR>', keymap_opts)
-map('n', '<A-3>', ':BufferGoto 3<CR>', keymap_opts)
-map('n', '<A-4>', ':BufferGoto 4<CR>', keymap_opts)
-map('n', '<A-5>', ':BufferGoto 5<CR>', keymap_opts)
-map('n', '<A-6>', ':BufferGoto 6<CR>', keymap_opts)
-map('n', '<A-7>', ':BufferGoto 7<CR>', keymap_opts)
-map('n', '<A-8>', ':BufferGoto 8<CR>', keymap_opts)
-map('n', '<A-9>', ':BufferGoto 9<CR>', keymap_opts)
-map('n', '<A-0>', ':BufferLast<CR>', keymap_opts)
-map('n', '<A-c>', ':BufferClose<CR>', keymap_opts)
-map('n', '<Space>bn', ':BufferOrderByBufferNumber<CR>', keymap_opts)
-map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', keymap_opts)
-map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', keymap_opts)
-
-vim.g.bufferline = {
-  animation = false,
-  tabpages = true,
-  closable = true,
-  clickable = true,
-  icons = numbers,
-  insert_at_end = true,
-}
