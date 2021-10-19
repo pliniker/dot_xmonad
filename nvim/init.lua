@@ -57,9 +57,7 @@ paq {'savq/paq-nvim', opt = true}    -- paq-nvim manages itself
 paq {'mhartington/oceanic-next'}
 paq {'nvim-treesitter/nvim-treesitter'}
 paq {'neovim/nvim-lspconfig'}
-paq {'glepnir/lspsaga.nvim'}
 paq {'junegunn/fzf', run = fn['fzf#install']}
-paq {'ojroques/nvim-lspfuzzy'}
 paq {'hrsh7th/cmp-nvim-lsp'}
 paq {'hrsh7th/cmp-buffer'}
 paq {'hrsh7th/cmp-vsnip'}
@@ -154,8 +152,6 @@ require('nvim-treesitter.configs').setup {
     ensure_installed = 'maintained', highlight = {enable = true}
 }
 
-require('lspfuzzy').setup {}
-
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -197,3 +193,6 @@ for _, lsp in ipairs(servers) do
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 end
+
+-- autoformat
+vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
