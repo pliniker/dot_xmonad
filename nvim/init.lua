@@ -6,7 +6,7 @@
 -- Install into `$HOME/.config/nvim/init.lua`
 --
 -- ## Install paq
--- 
+--
 -- ```
 -- git clone https://github.com/savq/paq-nvim.git \
 --    "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/opt/paq-nvim
@@ -71,6 +71,7 @@ paq {'simrat39/rust-tools.nvim'}
 paq {'kyazdani42/nvim-web-devicons'}
 paq {'hoob3rt/lualine.nvim'}
 paq {'nvim-telescope/telescope.nvim'}
+paq {'cappyzawa/trim.nvim'}
 paq {'folke/which-key.nvim'}
 
 require('nvim-web-devicons').setup { default = true; }
@@ -86,6 +87,16 @@ require('telescope').setup {
       previewer = false
     }
   }
+}
+
+require('trim').setup {
+  disable = {},
+  patterns = {
+    [[%s/\s\+$//e]],
+    [[%s/\($\n\s*\)\+\%$//]],
+    [[%s/\%^\n\+//]],
+    [[%s/\(\n\n\)\n\+/\1/]],
+  },
 }
 
 local wk = require("which-key")
@@ -160,29 +171,29 @@ map('n', '<leader>gs', ':Telescope git_status<CR>', keymap_opts)
 local cmp = require('cmp')
 
 cmp.setup({
-    snippet = {
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
-      end,
-    },
-    mapping = {
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.close(),
-      ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-    },
-    sources = {
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' },
-      { name = 'buffer' },
-    }
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'buffer' },
+  }
 })
 
 -- lsp
 require('nvim-treesitter.configs').setup {
-    ensure_installed = 'maintained',
-    highlight = { enable = true }
+  ensure_installed = 'maintained',
+  highlight = { enable = true }
 }
 
 local on_attach = function(client, bufnr)
@@ -213,7 +224,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 end
 
--- Call 'setup' on multiple servers and map buffer local keybindings 
+-- Call 'setup' on multiple servers and map buffer local keybindings
 -- when the language server attaches
 local nvim_lsp = require('lspconfig')
 
@@ -230,4 +241,3 @@ end
 
 -- formatting on save
 vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
-vim.api.nvim_command[[autocmd BufWritePre * :%s/\s\+$//e]]
