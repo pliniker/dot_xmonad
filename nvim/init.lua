@@ -153,6 +153,7 @@ local keymap_opts = { noremap = true, silent = true }
 
 map('i', 'jj', '<Esc>', keymap_opts)
 map('n', '<A-q>', ':qa<Enter>', keymap_opts)
+map('i', '<C-H>', '<C-W>', keymap_opts)
 
 map('n', '<leader>bb', ':Telescope buffers<CR>', keymap_opts)
 map('n', '<leader>bd', ':bdelete<CR>', keymap_opts)
