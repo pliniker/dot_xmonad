@@ -239,3 +239,5 @@ end
 
 -- formatting on save
 vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+-- markdown files wrap at 80 characters wide
+vim.api.nvim_command[[au BufRead,BufNewFile *.md setlocal textwidth=80]]
