@@ -153,7 +153,6 @@ local keymap_opts = { noremap = true, silent = true }
 
 map('i', 'jj', '<Esc>', keymap_opts)
 map('n', '<A-q>', ':qa<Enter>', keymap_opts)
-map('i', '<C-H>', '<C-W>', keymap_opts)
 
 map('n', '<leader>bb', ':Telescope buffers<CR>', keymap_opts)
 map('n', '<leader>bd', ':bdelete<CR>', keymap_opts)
@@ -240,3 +239,5 @@ end
 
 -- formatting on save
 vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+-- markdown files wrap at 80 characters wide
+vim.api.nvim_command[[au BufRead,BufNewFile *.md setlocal textwidth=80]]
