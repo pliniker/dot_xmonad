@@ -70,6 +70,7 @@ require "paq" {
     'kyazdani42/nvim-web-devicons';
     'hoob3rt/lualine.nvim';
     'nvim-telescope/telescope.nvim';
+    'nvim-telescope/telescope-file-browser.nvim';
     'cappyzawa/trim.nvim';
     'folke/which-key.nvim';
 }
@@ -88,6 +89,8 @@ require('telescope').setup {
     }
   }
 }
+
+require("telescope").load_extension "file_browser"
 
 require('trim').setup {
   disable = {},
