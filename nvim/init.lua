@@ -8,8 +8,8 @@
 -- ## Install paq
 --
 -- ```
--- git clone https://github.com/savq/paq-nvim.git \
---    "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/opt/paq-nvim
+-- git clone --depth=1 https://github.com/savq/paq-nvim.git \
+--  "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
 -- ```
 --
 -- ## Then install plugins
@@ -52,27 +52,27 @@ local map = vim.api.nvim_set_keymap
 g.mapleader = " "
 
 -- plugins
-cmd 'packadd paq-nvim'               -- load the package manager
-local paq = require('paq-nvim').paq  -- a convenient alias
-paq {'savq/paq-nvim', opt = true}    -- paq-nvim manages itself
+require "paq" {
+    "savq/paq-nvim";
 
-paq {'mhartington/oceanic-next'}
-paq {'nvim-treesitter/nvim-treesitter'}
-paq {'neovim/nvim-lspconfig'}
-paq {'junegunn/fzf', run = fn['fzf#install']}
-paq {'hrsh7th/cmp-nvim-lsp'}
-paq {'hrsh7th/cmp-buffer'}
-paq {'hrsh7th/cmp-vsnip'}
-paq {'hrsh7th/vim-vsnip'}
-paq {'hrsh7th/nvim-cmp'}
-paq {'nvim-lua/plenary.nvim'}
-paq {'lewis6991/gitsigns.nvim'}
-paq {'simrat39/rust-tools.nvim'}
-paq {'kyazdani42/nvim-web-devicons'}
-paq {'hoob3rt/lualine.nvim'}
-paq {'nvim-telescope/telescope.nvim'}
-paq {'cappyzawa/trim.nvim'}
-paq {'folke/which-key.nvim'}
+    'mhartington/oceanic-next';
+    'nvim-treesitter/nvim-treesitter';
+    'neovim/nvim-lspconfig';
+    {'junegunn/fzf', run = fn['fzf#install']};
+    'hrsh7th/cmp-nvim-lsp';
+    'hrsh7th/cmp-buffer';
+    'hrsh7th/cmp-vsnip';
+    'hrsh7th/vim-vsnip';
+    'hrsh7th/nvim-cmp';
+    'nvim-lua/plenary.nvim';
+    'lewis6991/gitsigns.nvim';
+    'simrat39/rust-tools.nvim';
+    'kyazdani42/nvim-web-devicons';
+    'hoob3rt/lualine.nvim';
+    'nvim-telescope/telescope.nvim';
+    'cappyzawa/trim.nvim';
+    'folke/which-key.nvim';
+}
 
 require('nvim-web-devicons').setup { default = true; }
 require('gitsigns').setup()
